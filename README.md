@@ -1,1 +1,2 @@
-# Volume-Tracking-Based-Reference-Mesh-Extraction-for-Time-Varying-Mesh-Compression
+# **TVMC: Time-Varying Mesh Compression Using Volume-Tracked Reference Meshes**
+
