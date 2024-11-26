@@ -1,0 +1,10 @@
+/.vs/
+/bin/
+/Client/*.user
+/Client/bin/
+/Client/obj/
+/Framework/*.user
+/Framework/bin/
+/Framework/obj/
+/packages/
+results/*
