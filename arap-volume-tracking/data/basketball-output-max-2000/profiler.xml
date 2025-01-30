@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<profiler>
+  <record name="Frame" param="Frame" timestamp="250130:13:46:47.73">
+    <start provider="ProfilerTotalTimeProvider" value="0" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:46:47.73">
+      <record name="Building volume grid" timestamp="250130:13:46:47.73">
+        <finished provider="ProfilerTimeIntervalProvider" value="1897" />
+      </record>
+      <record name="Lloyd" timestamp="250130:13:46:49.63">
+        <finished provider="ProfilerTimeIntervalProvider" value="1569" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="3469" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:46:51.20">
+      <finished provider="ProfilerTimeIntervalProvider" value="17" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="3507" />
+    <finished provider="ProfilerTotalTimeProvider" value="3.5" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:46:51.24">
+    <start provider="ProfilerTotalTimeProvider" value="3.5" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:46:51.24">
+      <record name="Building volume grid" timestamp="250130:13:46:51.24">
+        <finished provider="ProfilerTimeIntervalProvider" value="1749" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1750" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:46:52.99">
+      <record name="Extrapolating" timestamp="250130:13:46:52.99">
+        <finished provider="ProfilerTimeIntervalProvider" value="1" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:46:52.99">
+        <finished provider="ProfilerTimeIntervalProvider" value="32" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:46:53.03">
+        <finished provider="ProfilerTimeIntervalProvider" value="21349" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:47:14.39">
+        <finished provider="ProfilerTimeIntervalProvider" value="1406" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="22814" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="24578" />
+    <finished provider="ProfilerTotalTimeProvider" value="28.1" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:47:15.82">
+    <start provider="ProfilerTotalTimeProvider" value="28.1" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:47:15.82">
+      <record name="Building volume grid" timestamp="250130:13:47:15.82">
+        <finished provider="ProfilerTimeIntervalProvider" value="1599" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1600" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:47:17.42">
+      <record name="Extrapolating" timestamp="250130:13:47:17.43">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:47:17.43">
+        <finished provider="ProfilerTimeIntervalProvider" value="11" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:47:17.44">
+        <finished provider="ProfilerTimeIntervalProvider" value="10972" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:47:28.42">
+        <finished provider="ProfilerTimeIntervalProvider" value="1236" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="12239" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="13854" />
+    <finished provider="ProfilerTotalTimeProvider" value="42" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:47:29.68">
+    <start provider="ProfilerTotalTimeProvider" value="42" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:47:29.68">
+      <record name="Building volume grid" timestamp="250130:13:47:29.68">
+        <finished provider="ProfilerTimeIntervalProvider" value="1763" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1764" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:47:31.45">
+      <record name="Extrapolating" timestamp="250130:13:47:31.45">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:47:31.45">
+        <finished provider="ProfilerTimeIntervalProvider" value="8" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:47:31.45">
+        <finished provider="ProfilerTimeIntervalProvider" value="8910" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:47:40.37">
+        <finished provider="ProfilerTimeIntervalProvider" value="1137" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="10076" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="11853" />
+    <finished provider="ProfilerTotalTimeProvider" value="53.8" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:47:41.54">
+    <start provider="ProfilerTotalTimeProvider" value="53.8" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:47:41.54">
+      <record name="Building volume grid" timestamp="250130:13:47:41.54">
+        <finished provider="ProfilerTimeIntervalProvider" value="1755" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1756" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:47:43.30">
+      <record name="Extrapolating" timestamp="250130:13:47:43.30">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:47:43.30">
+        <finished provider="ProfilerTimeIntervalProvider" value="7" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:47:43.30">
+        <finished provider="ProfilerTimeIntervalProvider" value="9266" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:47:52.58">
+        <finished provider="ProfilerTimeIntervalProvider" value="1904" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="11198" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="12968" />
+    <finished provider="ProfilerTotalTimeProvider" value="66.8" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:47:54.51">
+    <start provider="ProfilerTotalTimeProvider" value="66.8" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:47:54.51">
+      <record name="Building volume grid" timestamp="250130:13:47:54.51">
+        <finished provider="ProfilerTimeIntervalProvider" value="1746" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1747" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:47:56.26">
+      <record name="Extrapolating" timestamp="250130:13:47:56.26">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:47:56.26">
+        <finished provider="ProfilerTimeIntervalProvider" value="7" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:47:56.27">
+        <finished provider="ProfilerTimeIntervalProvider" value="8900" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:48:05.18">
+        <finished provider="ProfilerTimeIntervalProvider" value="1878" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="10806" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="12567" />
+    <finished provider="ProfilerTotalTimeProvider" value="79.4" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:48:07.08">
+    <start provider="ProfilerTotalTimeProvider" value="79.4" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:48:07.08">
+      <record name="Building volume grid" timestamp="250130:13:48:07.08">
+        <finished provider="ProfilerTimeIntervalProvider" value="1747" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1747" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:48:08.83">
+      <record name="Extrapolating" timestamp="250130:13:48:08.83">
+        <finished provider="ProfilerTimeIntervalProvider" value="1" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:48:08.83">
+        <finished provider="ProfilerTimeIntervalProvider" value="5" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:48:08.84">
+        <finished provider="ProfilerTimeIntervalProvider" value="7475" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:48:16.32">
+        <finished provider="ProfilerTimeIntervalProvider" value="1949" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="9447" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="11208" />
+    <finished provider="ProfilerTotalTimeProvider" value="90.6" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:48:18.29">
+    <start provider="ProfilerTotalTimeProvider" value="90.6" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:48:18.29">
+      <record name="Building volume grid" timestamp="250130:13:48:18.29">
+        <finished provider="ProfilerTimeIntervalProvider" value="1810" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1810" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:48:20.10">
+      <record name="Extrapolating" timestamp="250130:13:48:20.11">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:48:20.11">
+        <finished provider="ProfilerTimeIntervalProvider" value="5" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:48:20.11">
+        <finished provider="ProfilerTimeIntervalProvider" value="9272" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:48:29.39">
+        <finished provider="ProfilerTimeIntervalProvider" value="1064" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="10359" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="12182" />
+    <finished provider="ProfilerTotalTimeProvider" value="102.8" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:48:30.48">
+    <start provider="ProfilerTotalTimeProvider" value="102.8" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:48:30.48">
+      <record name="Building volume grid" timestamp="250130:13:48:30.48">
+        <finished provider="ProfilerTimeIntervalProvider" value="1894" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1895" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:48:32.38">
+      <record name="Extrapolating" timestamp="250130:13:48:32.38">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:48:32.38">
+        <finished provider="ProfilerTimeIntervalProvider" value="3" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:48:32.38">
+        <finished provider="ProfilerTimeIntervalProvider" value="12171" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:48:44.56">
+        <finished provider="ProfilerTimeIntervalProvider" value="1899" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="14092" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="16000" />
+    <finished provider="ProfilerTotalTimeProvider" value="118.8" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:48:46.49">
+    <start provider="ProfilerTotalTimeProvider" value="118.8" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:48:46.49">
+      <record name="Building volume grid" timestamp="250130:13:48:46.49">
+        <finished provider="ProfilerTimeIntervalProvider" value="1970" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="1971" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:48:48.46">
+      <record name="Extrapolating" timestamp="250130:13:48:48.46">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:48:48.46">
+        <finished provider="ProfilerTimeIntervalProvider" value="6" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:48:48.46">
+        <finished provider="ProfilerTimeIntervalProvider" value="9221" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:48:57.69">
+        <finished provider="ProfilerTimeIntervalProvider" value="1110" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="10356" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="12342" />
+    <finished provider="ProfilerTotalTimeProvider" value="131.1" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:48:58.83">
+    <start provider="ProfilerTotalTimeProvider" value="131.1" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:48:58.83">
+      <record name="Building volume grid" timestamp="250130:13:48:58.83">
+        <finished provider="ProfilerTimeIntervalProvider" value="2056" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="2057" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:49:00.89">
+      <record name="Extrapolating" timestamp="250130:13:49:00.89">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:49:00.89">
+        <finished provider="ProfilerTimeIntervalProvider" value="3" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:49:00.89">
+        <finished provider="ProfilerTimeIntervalProvider" value="12741" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:49:13.64">
+        <finished provider="ProfilerTimeIntervalProvider" value="1132" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="13896" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="15967" />
+    <finished provider="ProfilerTotalTimeProvider" value="147.1" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:49:14.80">
+    <start provider="ProfilerTotalTimeProvider" value="147.1" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:49:14.80">
+      <record name="Building volume grid" timestamp="250130:13:49:14.80">
+        <finished provider="ProfilerTimeIntervalProvider" value="2203" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="2204" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:49:17.01">
+      <record name="Extrapolating" timestamp="250130:13:49:17.01">
+        <finished provider="ProfilerTimeIntervalProvider" value="1" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:49:17.01">
+        <finished provider="ProfilerTimeIntervalProvider" value="3" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:49:17.01">
+        <finished provider="ProfilerTimeIntervalProvider" value="10323" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:49:27.34">
+        <finished provider="ProfilerTimeIntervalProvider" value="1085" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="11430" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="13651" />
+    <finished provider="ProfilerTotalTimeProvider" value="160.7" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:49:28.46">
+    <start provider="ProfilerTotalTimeProvider" value="160.7" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:49:28.46">
+      <record name="Building volume grid" timestamp="250130:13:49:28.46">
+        <finished provider="ProfilerTimeIntervalProvider" value="2241" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="2242" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:49:30.70">
+      <record name="Extrapolating" timestamp="250130:13:49:30.70">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:49:30.70">
+        <finished provider="ProfilerTimeIntervalProvider" value="3" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:49:30.71">
+        <finished provider="ProfilerTimeIntervalProvider" value="12565" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:49:43.28">
+        <finished provider="ProfilerTimeIntervalProvider" value="1075" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="13662" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="15917" />
+    <finished provider="ProfilerTotalTimeProvider" value="176.7" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:49:44.38">
+    <start provider="ProfilerTotalTimeProvider" value="176.7" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:49:44.38">
+      <record name="Building volume grid" timestamp="250130:13:49:44.38">
+        <finished provider="ProfilerTimeIntervalProvider" value="2321" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="2322" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:49:46.70">
+      <record name="Extrapolating" timestamp="250130:13:49:46.70">
+        <finished provider="ProfilerTimeIntervalProvider" value="1" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:49:46.70">
+        <finished provider="ProfilerTimeIntervalProvider" value="2" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:49:46.71">
+        <finished provider="ProfilerTimeIntervalProvider" value="22512" />
+      </record>
+      <record name="Affinity update" timestamp="250130:13:50:09.23">
+        <finished provider="ProfilerTimeIntervalProvider" value="1819" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="24350" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="26692" />
+    <finished provider="ProfilerTotalTimeProvider" value="203.4" />
+  </record>
+  <record name="Frame" param="Frame" timestamp="250130:13:50:11.08">
+    <start provider="ProfilerTotalTimeProvider" value="203.4" />
+    <record name="Preprocess" param="Preprocess" timestamp="250130:13:50:11.08">
+      <record name="Building volume grid" timestamp="250130:13:50:11.08">
+        <finished provider="ProfilerTimeIntervalProvider" value="2407" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="2407" />
+    </record>
+    <record name="Tracking" timestamp="250130:13:50:13.49">
+      <record name="Extrapolating" timestamp="250130:13:50:13.49">
+        <finished provider="ProfilerTimeIntervalProvider" value="0" />
+      </record>
+      <record name="Presmoothing" timestamp="250130:13:50:13.49">
+        <finished provider="ProfilerTimeIntervalProvider" value="3" />
+      </record>
+      <record name="Optimization" timestamp="250130:13:50:13.49">
+        <finished provider="ProfilerTimeIntervalProvider" value="15587" />
+      </record>
+      <finished provider="ProfilerTimeIntervalProvider" value="15603" />
+    </record>
+    <finished provider="ProfilerTimeIntervalProvider" value="18029" />
+    <finished provider="ProfilerTotalTimeProvider" value="221.4" />
+  </record>
+</profiler>

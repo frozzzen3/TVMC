@@ -8,7 +8,7 @@ This repository contains the official authors implementation associated with the
 
 ## Step-by-step Tutorial
 
-I'll use `Dancer` dataset from [TDMD](https://multimedia.tencent.com/resources/tdmd) to show the whole pipeline.
+I'll use `basketball player ` dataset from [TDMD](https://multimedia.tencent.com/resources/tdmd) to show the whole pipeline.
 
 ## Step 1: As-rigid-as-possible Volume tracking
 
@@ -23,7 +23,7 @@ dotnet build -c release
 The build application is in `./bin` folder.
 
 ```
-dotnet ./bin/client.dll ./config/max/config-dancer-max.xml
+dotnet ./bin/client.dll ./config/max/config-basketball-max.xml
 ```
 
 Now, you can find volume tracking results in the `<outDir>` folder.
@@ -50,13 +50,55 @@ dotnet ./bin/client.dll <config_file.xml>
 
 Global optimization mode is optional, it can only be adopted after getting volume centers, it will try to remove a certain number of abnormal volume centers and adjust positions of the remains.
 
-
-
 ## Step 2: Using multi-dimensional scaling to generate reference centers
 
 go to the root folder of TVMC, `cd ./TVMC`, and run
 
 ```
-python .\get_reference_center.py --dataset dancer --num_frames 10 --num_centers 2000 --centers_dir ..\arap-volume-tracking\data\dancer_2000
+python .\get_reference_center.py --dataset basketball_player --num_frames 10 --num_centers 2000 --centers_dir ..\arap-volume-tracking\data\basketball-output-max-2000
+```
+
+Now `reference_centers_aligned.xyz` is generated in `./arap-volume-tracking/data/basketball-output-max-2000`
+
+(When the number of volume center exceeds a certain value, MDS may give abnormal output, you may need to try different `random_state` for a better result.)
+
+## Step 3: Get transformation dual quaternions 
+
+`cd ./TVMC`
+
+```
+python .\get_transformation.py --dataset basketball_player --num_frames 10 --num_centers 2000 --centers_dir ..\arap-volume-tracking\data\basketball-output-max-2000\ --firstIndex 10 --lastIndex 25
+```
+
+
+
+## Step 4: Create volume-tracked self-contact-free reference mesh
+
+So far, we've got a set of reference centers, let's deform meshes to the reference shape.
+
+go to `cd ./tvm-editing`, then build
+
+```
+dotnet build  TVMEditor.sln --configuration Release --no-incremental
+```
+
+> Usage: Program <dataset> <mode> <firstIndex> <lastIndex> [inputDir] [outputDir]
+> <dataset>: dancer | basketball | mitch | thomas
+> <mode>: 1 (deform mesh to the reference shape) | 2 (deform reference mesh back to each mesh in the group)
+> <firstIndex>: Starting index of the files to process
+> <lastIndex>: Ending index of the files to process
+> [inputDir]: Optional, default is 'Data/basketball_player_2000'
+> [outputDir]: Optional, default is 'output'
+
+```
+TVMEditor.Test\bin\Release\net5.0\TVMEditor.Test.exe basketball 1 10 19 ".\TVMEditor.Test\bin\Release\net5.0\Data\basketball_player_2000" ".\TVMEditor.Test\bin\Release\net5.0\output\basketball_player_2000\"
+```
+
+
+
+Then go to `cd ./TVMC`, run
+
+```
+python .\extract_reference_mesh.py --dataset basketball_player --num_frames 10 --num_centers 2000 --inputDir ..\tvm-editing\TVMEditor.Test\bin\Release\net5.0\output\basketball_player_2000\output\ --outputDir ..\tvm-editing\TVMEditor.Test\bin\Release\net5.0\Data\basketball_player_2000\reference_mesh\ --firstIndex 10 --lastIndex 19
 ```
 

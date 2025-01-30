@@ -11,7 +11,7 @@ namespace TVMEditor.Test.Experiments
 {
     public class Mitch
     {
-        public static void Run(string inputDir, string outputDir)
+        public static void Run(string inputDir, string outputDir, int firstIndex, int lastIndex, string mode)
         {
             Console.WriteLine(inputDir);
             Console.WriteLine(outputDir);
