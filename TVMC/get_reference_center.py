@@ -61,7 +61,7 @@ max_distance_matrix = np.loadtxt(output_file)
 if random_state is None:
     random_state = np.random.randint(0, 100000)
 print(f"Feed Distance Matrix to multi-dimensional scaling to get reference centers, random_state = {random_state}")
-mds = MDS(n_components=3, metric=True, dissimilarity='precomputed', n_jobs=-1, eps=1e-20, verbose=0, random_state=random_state,
+mds = MDS(n_components=3, metric=True, dissimilarity='precomputed', n_jobs=-1, eps=1e-10, verbose=0, random_state=random_state,
           n_init=6, max_iter=300)
 reference_centers = mds.fit_transform(max_distance_matrix)
 

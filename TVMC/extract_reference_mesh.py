@@ -99,7 +99,7 @@ pre_reference_mesh.compute_vertex_normals()
 pre_reference_mesh.paint_uniform_color([0.7, 0.7, 0.7])
 # o3d.visualization.draw_geometries([pre_reference_mesh])
 
-reference_mesh = o3d.geometry.TriangleMesh.simplify_quadric_decimation(pre_reference_mesh, np.array(deformed_meshes[key].triangles).__len__(), boundary_weight=8000)
+reference_mesh = o3d.geometry.TriangleMesh.simplify_quadric_decimation(pre_reference_mesh, round(np.array(deformed_meshes[key].triangles).__len__() * 0.25), boundary_weight=8000)
 print(reference_mesh)
 reference_mesh.compute_vertex_normals()
 
@@ -108,9 +108,8 @@ reference_mesh.compute_vertex_normals()
 
 
 
-print(np.array(reference_mesh.vertices).__len__())
-decimated_reference_mesh = o3d.geometry.TriangleMesh.simplify_quadric_decimation(reference_mesh, np.array(deformed_meshes[key].triangles).__len__(),
-                                                                                 boundary_weight=8000)
-print(decimated_reference_mesh)
+#print(np.array(reference_mesh.vertices).__len__())
+#decimated_reference_mesh = o3d.geometry.TriangleMesh.simplify_quadric_decimation(reference_mesh, np.array(deformed_meshes[key].triangles).__len__(), boundary_weight=8000)
+#print(decimated_reference_mesh)
 
-o3d.io.write_triangle_mesh(os.path.join(outputDir, "decimated_reference_mesh.obj"), decimated_reference_mesh, write_vertex_normals=False, write_vertex_colors=False, write_triangle_uvs=False)
+o3d.io.write_triangle_mesh(os.path.join(outputDir, "decimated_reference_mesh.obj"), reference_mesh, write_vertex_normals=False, write_vertex_colors=False, write_triangle_uvs=False)

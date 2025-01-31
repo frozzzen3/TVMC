@@ -32,6 +32,14 @@ Now, you can find volume tracking results in the `<outDir>` folder.
 
 `.txt` files represent the transformation for each centers between frames 
 
+Global optimization mode can only be adopted after getting volume centers, it will try to remove a certain number of abnormal volume centers and adjust positions of the remains. Although it is optional, we do recommend to do this step to get a better set of volume centers, which can significantly reduce distortions for the following steps.
+
+```
+dotnet ./bin/client.dll ./config/impr/config-basketball-impr.xml
+```
+
+You can find the optimized volume tracking results in the `<outDir>/impr` folder.
+
 
 
 Some other time-varying mesh sequences are stored in `./arap-volume-tracking/data`.
@@ -48,26 +56,26 @@ dotnet ./bin/client.dll <config_file.xml>
 
 
 
-Global optimization mode is optional, it can only be adopted after getting volume centers, it will try to remove a certain number of abnormal volume centers and adjust positions of the remains.
-
 ## Step 2: Using multi-dimensional scaling to generate reference centers
 
 go to the root folder of TVMC, `cd ./TVMC`, and run
 
 ```
-python .\get_reference_center.py --dataset basketball_player --num_frames 10 --num_centers 2000 --centers_dir ..\arap-volume-tracking\data\basketball-output-max-2000
+python .\get_reference_center.py --dataset basketball_player --num_frames 10 --num_centers 1995 --centers_dir ..\arap-volume-tracking\data\basketball-output-max-2000/impr
 ```
 
-Now `reference_centers_aligned.xyz` is generated in `./arap-volume-tracking/data/basketball-output-max-2000`
+The `--num_centers` is set to 1995 because global optimization mode changes . You can set how many centers you want to remove before running the global optimization mode. Please set the right center number.
 
-(When the number of volume center exceeds a certain value, MDS may give abnormal output, you may need to try different `random_state` for a better result.)
+Now `reference_centers_aligned.xyz` is generated in `./arap-volume-tracking/data/basketball-output-max-2000/impr/reference`
+
+(When the number of volume center exceeds a certain value, MDS may give abnormal output, you may need to try different `random_state` for a optimal result.)
 
 ## Step 3: Get transformation dual quaternions 
 
 `cd ./TVMC`
 
 ```
-python .\get_transformation.py --dataset basketball_player --num_frames 10 --num_centers 2000 --centers_dir ..\arap-volume-tracking\data\basketball-output-max-2000\ --firstIndex 10 --lastIndex 25
+python .\get_transformation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --centers_dir ..\arap-volume-tracking\data\basketball-output-max-2000\impr --firstIndex 11 --lastIndex 20 
 ```
 
 
@@ -91,7 +99,7 @@ dotnet build  TVMEditor.sln --configuration Release --no-incremental
 > [outputDir]: Optional, default is 'output'
 
 ```
-TVMEditor.Test\bin\Release\net5.0\TVMEditor.Test.exe basketball 1 10 19 ".\TVMEditor.Test\bin\Release\net5.0\Data\basketball_player_2000" ".\TVMEditor.Test\bin\Release\net5.0\output\basketball_player_2000\"
+TVMEditor.Test\bin\Release\net5.0\TVMEditor.Test.exe basketball 1 11 20 ".\TVMEditor.Test\bin\Release\net5.0\Data\basketball_player_1995/" ".\TVMEditor.Test\bin\Release\net5.0\output\basketball_player_1995\" 
 ```
 
 
@@ -99,6 +107,37 @@ TVMEditor.Test\bin\Release\net5.0\TVMEditor.Test.exe basketball 1 10 19 ".\TVMEd
 Then go to `cd ./TVMC`, run
 
 ```
-python .\extract_reference_mesh.py --dataset basketball_player --num_frames 10 --num_centers 2000 --inputDir ..\tvm-editing\TVMEditor.Test\bin\Release\net5.0\output\basketball_player_2000\output\ --outputDir ..\tvm-editing\TVMEditor.Test\bin\Release\net5.0\Data\basketball_player_2000\reference_mesh\ --firstIndex 10 --lastIndex 19
+python .\extract_reference_mesh.py --dataset basketball_player --num_frames 10 --num_centers 1995 --inputDir ..\tvm-editing\TVMEditor.Test\bin\Release\net5.0\output\basketball_player_1995\output\ --outputDir ..\tvm-editing\TVMEditor.Test\bin\Release\net5.0\Data\basketball_player_1995\reference_mesh\ --firstIndex 11 --lastIndex 20
 ```
 
+
+
+## Step 5: Deform reference mesh to each mesh in the group
+
+Recall that the key idea is the deform the self-contact-free reference mesh to get approximation of each meshes in the group, so that we can compress a group of meshes with one reference mesh and some displacement fields, which saves bitrates. 
+
+To deform the self-contact-free reference mesh "back", run `tvm-editing` again. 
+
+ `cd ./tvm-editing`, then execute 
+
+```
+TVMEditor.Test\bin\Release\net5.0\TVMEditor.Test.exe basketball 2 11 20 ".\TVMEditor.Test\bin\Release\net5.0\Data\basketball_player_1995" ".\TVMEditor.Test\bin\Release\net5.0\output\basketball_player_1995\" 
+```
+
+
+
+## Step 6: Get displacement fields					
+
+The most significant difference between time-varying mesh sequences and dynamic mesh sequences is **varying topology**, which means although adjacent meshes in the sequence has similar shapes, they have different number of vertices and connectivity. Thanks to TVMC, these deformed reference meshes are "tracked" with the self-contact-free reference mesh.
+
+```
+python .\get_displacements.py --dataset basketball_player --num_frames 10 --num_centers 1995 --target_mesh_path ..\arap-volume-tracking\data\basketball --firstIndex 11 --lastIndex 20
+```
+
+Now, we've got everything for compression. You can use anything you want to compress the decimated reference mesh and these displacements. 
+
+In TVMC, we store displacements as `.ply` files and use Google Draco to compress both the reference mesh and displacements, I'm pretty sure that there are other ways that can get even better compression performance (e.g., video coding for displacements, because there are some redundancy between displacements, the movement of a person or object has a certain "inertia"). 
+
+
+
+## *Step 7: Compression and evaluation 
