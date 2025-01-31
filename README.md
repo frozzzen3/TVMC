@@ -8,7 +8,7 @@ This repository contains the official authors implementation associated with the
 
 ## Step-by-step Tutorial
 
-I'll use `basketball player ` dataset from [TDMD](https://multimedia.tencent.com/resources/tdmd) to show the whole pipeline.
+I'll use `basketball player` dataset from [TDMD](https://multimedia.tencent.com/resources/tdmd) to show the whole pipeline.
 
 ## Step 1: As-rigid-as-possible Volume tracking
 
@@ -172,6 +172,5 @@ Draco decoder path: `./draco/build/Release/draco.decoder.exe`
 
 ```
 python .\evaluation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --firstIndex 11 --lastIndex 20 --fileNamePrefix basketball_player_fr0 --encoderPath ..\draco\build_dir\Release\draco_encoder.exe --decoderPath ..\draco\build_dir\Release\draco_decoder.exe --qp 10
-
 ```
 
