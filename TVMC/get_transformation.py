@@ -34,7 +34,7 @@ def get_dual_quaternions(original_centers, transformed_centers):
 
 
 parser = argparse.ArgumentParser(description="Get transformation matrix.")
-parser.add_argument('--dataset', type=str, required=True, help="Dataset name (e.g., 'dancer')")
+parser.add_argument('--dataset', type=str, required=True, help="Dataset name (e.g., 'basketball_player')")
 parser.add_argument('--num_frames', type=int, required=True, help="Number of frames to process")
 parser.add_argument('--num_centers', type=int, required=True, help="Number of volume centers (pointCount)")
 parser.add_argument('--centers_dir', type=str, required=True, help="Path for the volume centers")

@@ -6,7 +6,7 @@ from sklearn.manifold import MDS
 
 # Command-line argument parser
 parser = argparse.ArgumentParser(description="Get the set of reference centers.")
-parser.add_argument('--dataset', type=str, required=True, help="Dataset name (e.g., 'dancer')")
+parser.add_argument('--dataset', type=str, required=True, help="Dataset name (e.g., 'basketball_player')")
 parser.add_argument('--num_frames', type=int, required=True, help="Number of frames to process")
 parser.add_argument('--num_centers', type=int, required=True, help="Number of volume centers (pointCount)")
 parser.add_argument('--centers_dir', type=str, required=True, help="Path for the volume centers")

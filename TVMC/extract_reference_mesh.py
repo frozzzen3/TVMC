@@ -28,7 +28,7 @@ def subdivide_surface_fitting(decimated_mesh, target_mesh, iterations=1):
     return subdivided_mesh
 
 parser = argparse.ArgumentParser(description="Extract reference mesh.")
-parser.add_argument('--dataset', type=str, required=True, help="Dataset name (e.g., 'dancer')")
+parser.add_argument('--dataset', type=str, required=True, help="Dataset name (e.g., 'basketball_player')")
 parser.add_argument('--num_frames', type=int, required=True, help="Number of frames to process")
 parser.add_argument('--num_centers', type=int, required=True, help="Number of volume centers (pointCount)")
 parser.add_argument('--inputDir', type=str, required=True, help="Input path for the deformed meshes")

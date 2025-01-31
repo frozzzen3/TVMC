@@ -141,3 +141,37 @@ In TVMC, we store displacements as `.ply` files and use Google Draco to compress
 
 
 ## *Step 7: Compression and evaluation 
+
+```
+git clone git@github.com:google/draco.git
+```
+
+```
+mkdir build && cd build
+```
+
+```
+cmake ../ -G "Visual Studio 17 2022" -A Win32
+```
+
+To generate 64-bit Windows Visual Studio 2022 projects:
+
+```
+cmake ../ -G "Visual Studio 17 2022" -A x64
+```
+
+Then
+
+```
+cmake --build . --config Release
+```
+
+Draco encoder path: `./draco/build/Release/draco.encoder.exe`
+
+Draco decoder path: `./draco/build/Release/draco.decoder.exe`
+
+```
+python .\evaluation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --firstIndex 11 --lastIndex 20 --fileNamePrefix basketball_player_fr0 --encoderPath ..\draco\build_dir\Release\draco_encoder.exe --decoderPath ..\draco\build_dir\Release\draco_decoder.exe --qp 10
+
+```
+
