@@ -37,7 +37,7 @@ Volume tracking results are saved in the `<outDir>` folder:
 
 ### Global Optimization (Optional but Recommended)
 
-Global optimization refines volume centers by removing anomalies and adjusting positions to reduce distortions.
+Global optimization refines volume centers by removing abnormal volume centers and adjusting positions for the remains to reduce distortions.
 
 ```
 dotnet ./bin/client.dll ./config/impr/config-basketball-impr.xml
@@ -73,6 +73,14 @@ If the number of volume centers is large, experiment with different `random_stat
 
 ## Step 3: Compute Transformation Dual Quaternions
 
+Navigate to TVMC root:
+
+```
+cd ./TVMC
+```
+
+Then, we compute the transformations for each center, mapping their original positions to the reference space, along with their inverses. These transformations are then used to deform the mesh surface based on the movement of volume centers.
+
 ```
 python ./get_transformation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --centers_dir ../arap-volume-tracking/data/basketball-output-max-2000/impr --firstIndex 11 --lastIndex 20
 ```
@@ -92,6 +100,12 @@ Run the mesh deformation:
 TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test.exe basketball 1 11 20 "./TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995/" "./TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/"
 ```
 
+Navigate to TVMC root again:
+
+```
+cd ./TVMC
+```
+
 Extract the reference mesh:
 
 ```
@@ -100,17 +114,35 @@ python ./extract_reference_mesh.py --dataset basketball_player --num_frames 10 -
 
 ## Step 5: Deform Reference Mesh to Each Mesh in the Group
 
+Navigate to the `tvm-editing` directory,
+
+```
+cd ./tvm-editing
+```
+
+Then run:
+
 ```
 TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test.exe basketball 2 11 20 "./TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995" "./TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/"
 ```
 
 ## Step 6: Compute Displacement Fields
 
+Navigate to TVMC root again:
+
 ```
-python ./get_displacements.py --dataset basketball_player --num_frames 10 --num_centers 1995 --target_mesh_path ../arap-volume-tracking/data/basketball --firstIndex 11 --lastIndex 20
+cd ./TVMC
+```
+
+```
+python ./get_displacements.py --dataset basketball_player --num_frames 10 --num_centers 1995 --target_mesh_path ../arap-volume-tracking/data/basketball_player --firstIndex 11 --lastIndex 20
 ```
 
 The displacement fields are stored as `.ply` files. For compression, Draco is used to encode both the reference mesh and displacements.
+
+
+
+Tips: So far, we've got everything we need for a group of time-varying mesh compression (A self-contact-free reference mesh and displacement fields). You can use any other compression methods to deal with them. For example, you may use video coding to compress displacements to get even better compression performance.
 
 ## Step 7: Compression and Evaluation
 
@@ -118,9 +150,17 @@ Clone and build Draco:
 
 ```
 git clone git@github.com:google/draco.git
-mkdir build && cd build
+cd ./draco
+mkdir build
+cd build
 cmake ../ -G "Visual Studio 17 2022" -A x64
 cmake --build . --config Release
+```
+
+On Mac OS X, run the following command to generate Xcode projects:
+
+```
+$ cmake ../ -G Xcode
 ```
 
 Draco paths:
@@ -128,8 +168,14 @@ Draco paths:
 - Encoder: `./draco/build/Release/draco_encoder.exe`
 - Decoder: `./draco/build/Release/draco_decoder.exe`
 
+Navigate to TVMC root again:
+
+```
+cd ./TVMC
+```
+
 Run the evaluation:
 
 ```
-python ./evaluation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --firstIndex 11 --lastIndex 20 --fileNamePrefix basketball_player_fr0 --encoderPath ../draco/build/Release/draco_encoder.exe --decoderPath ../draco/build/Release/draco_decoder.exe --qp 10
+python ./evaluation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --firstIndex 11 --lastIndex 20 --fileNamePrefix basketball_player_fr0 --encoderPath ../draco/build/Release/draco_encoder.exe --decoderPath ../draco/build/Release/draco_decoder.exe --qp 10 --outputPath ./basketball_player_outputs
 ```

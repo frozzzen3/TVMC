@@ -50,7 +50,7 @@ centers_dir = args.centers_dir
 firstIndex = args.firstIndex
 lastIndex = args.lastIndex
 
-mesh_path = f"../arap-volume-tracking/data/basketball"
+mesh_path = f"../arap-volume-tracking/data/{dataset}"
 
 data_base_path = f"../tvm-editing/TVMEditor.Test/bin/Release/net5.0/Data/{dataset}_{num_centers}"
 data_subdirectories = ["centers", "meshes", "reference_center", "reference_mesh"]
