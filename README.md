@@ -15,10 +15,6 @@ Follow these steps to build and run the Docker image:
 To begin, build the Docker image from the provided Dockerfile:
 
 ```
-bash
-
-
-CopyEdit
 docker build -t tvmc-linux .
 ```
 
@@ -27,10 +23,6 @@ docker build -t tvmc-linux .
 After building the image, run the Docker container with the following command:
 
 ```
-bash
-
-
-CopyEdit
 docker run --rm -it tvmc-linux
 ```
 
