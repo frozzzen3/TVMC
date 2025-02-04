@@ -12,6 +12,8 @@ This tutorial demonstrates the complete pipeline using the `basketball player` d
 
 ## Step 1: As-Rigid-As-Possible (ARAP) Volume Tracking
 
+ARAP volume tracking is written in C# and .NET 7.0
+
 Navigate to the root directory:
 
 ```
