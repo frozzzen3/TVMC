@@ -1,5 +1,9 @@
 #!/bin/bash
 # Activate Conda environment
+export PATH="/opt/conda/envs/open3d_env/bin:$PATH"
+
+# Activate the conda environment (if conda command is available in the shell)
+source /opt/conda/etc/profile.d/conda.sh
 conda activate open3d_env
 
 # Step 1: ARAP Volume Tracking and Global Optimization
