@@ -102,6 +102,14 @@ Run the mesh deformation:
 TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test.exe basketball 1 11 20 "./TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995/" "./TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/"
 ```
 
+for Linux:
+
+```
+TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test basketball 1 11 20 "./TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995/" "./TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/"
+```
+
+
+
 Navigate to TVMC root again:
 
 ```
@@ -127,6 +135,14 @@ Then run:
 ```
 TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test.exe basketball 2 11 20 "./TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995" "./TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/"
 ```
+
+For Linux:
+
+```
+TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test basketball 2 11 20 "./TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995" "./TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/"
+```
+
+
 
 ## Step 6: Compute Displacement Fields
 
