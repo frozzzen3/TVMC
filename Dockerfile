@@ -49,7 +49,7 @@ RUN git clone https://github.com/frozzzen3/TVMC.git
 WORKDIR /app/TVMC
 RUN git clone https://github.com/google/draco.git && \
     cd draco && mkdir build && cd build && \
-    cmake ../ && make
+    cmake ../ && make -j$(nproc)
 
 # Install additional Python dependencies
 RUN /opt/conda/envs/open3d_env/bin/pip install --upgrade pip && \

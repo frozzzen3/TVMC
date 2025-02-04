@@ -6,11 +6,54 @@ Guodong Chen, Filip Hácha, Libor Váša, Mallesham Dasari
 
 This repository contains the official authors implementation associated with the paper **"TVMC: Time-Varying Mesh Compression Using Volume-Tracked Reference Meshes"**, which can be found [here] (to be added), accepted by [2025 ACM MMSys](https://2025.acmmmsys.org/).
 
-## Step-by-Step Tutorial
+## Running with Docker
 
-This tutorial demonstrates the complete pipeline using the `basketball player` dataset from [TDMD](https://multimedia.tencent.com/resources/tdmd).
+Follow these steps to build and run the Docker image:
 
-We've test this on Windows 11 and Ubuntu 20.04. We also provide a Linux docker image for your convenience.
+### Step 1: Build the Docker Image
+
+To begin, build the Docker image from the provided Dockerfile:
+
+```
+bash
+
+
+CopyEdit
+docker build -t tvmc-linux .
+```
+
+### Step 2: Run the Docker Image
+
+After building the image, run the Docker container with the following command:
+
+```
+bash
+
+
+CopyEdit
+docker run --rm -it tvmc-linux
+```
+
+### Step 3: Run the Pipeline Script
+
+Once inside the Docker container, grant execute permissions to the `run_pipeline.sh` script and execute it:
+
+```
+chmod +x run_pipeline.sh
+sudo ./run_pipeline.sh
+```
+
+The pipeline will start, and the required tasks will be executed sequentially.
+
+
+
+---
+
+## Running TVMC on Your Own Machine
+
+If you want to run TVMC on your own machine using your own dataset, here’s how you can set it up.
+
+(Provide the detailed steps here for running the pipeline outside of Docker)
 
 ## Step 0:
 
@@ -99,7 +142,7 @@ dotnet ./bin/client.dll <config_file.xml>
 Navigate to TVMC root:
 
 ```
-cd ./TVMC
+cd ../TVMC
 ```
 
 Run the MDS script:
@@ -113,12 +156,6 @@ The number of centers (`--num_centers`) must match the global optimization resul
 If the number of volume centers is large, experiment with different `random_state` values for better results.
 
 ## Step 3: Compute Transformation Dual Quaternions
-
-Navigate to TVMC root:
-
-```
-cd ./TVMC
-```
 
 Then, we compute the transformations for each center, mapping their original positions to the reference space, along with their inverses. These transformations are then used to deform the mesh surface based on the movement of volume centers.
 
@@ -139,7 +176,7 @@ dotnet new globaljson --sdk-version 5.0.408
 Navigate to the `tvm-editing` directory and build:
 
 ```
-cd ./tvm-editing
+cd ../tvm-editing
 dotnet build TVMEditor.sln --configuration Release --no-incremental
 ```
 
@@ -160,7 +197,7 @@ TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test basketball 1 11 20 "./TVMEditor
 Navigate to TVMC root again:
 
 ```
-cd ./TVMC
+cd ../TVMC
 ```
 
 Extract the reference mesh:
@@ -174,7 +211,7 @@ python ./extract_reference_mesh.py --dataset basketball_player --num_frames 10 -
 Navigate to the `tvm-editing` directory,
 
 ```
-cd ./tvm-editing
+cd ../tvm-editing
 ```
 
 Then run:
@@ -196,7 +233,7 @@ TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test basketball 2 11 20 "./TVMEditor
 Navigate to TVMC root again:
 
 ```
-cd ./TVMC
+cd ../TVMC
 ```
 
 ```
