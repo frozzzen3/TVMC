@@ -29,7 +29,7 @@ dotnet build -c release
 Run the tracking process:
 
 ```
-dotnet ./bin/client.dll ./config/max/config-basketball-max.xml
+dotnet ./bin/Client.dll ./config/max/config-basketball-max.xml
 ```
 
 Volume tracking results are saved in the `<outDir>` folder:
@@ -42,7 +42,7 @@ Volume tracking results are saved in the `<outDir>` folder:
 Global optimization refines volume centers by removing abnormal volume centers and adjusting positions for the remains to reduce distortions.
 
 ```
-dotnet ./bin/client.dll ./config/impr/config-basketball-impr.xml
+dotnet ./bin/Client.dll ./config/impr/config-basketball-impr.xml
 ```
 
 Results are stored in `<outDir>/impr`.
