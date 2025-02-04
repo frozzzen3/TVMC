@@ -167,12 +167,24 @@ Tips: So far, we've got everything we need for a group of time-varying mesh comp
 Clone and build Draco:
 
 ```
-git clone git@github.com:google/draco.git
+git clone https://github.com/google/draco.git
 cd ./draco
 mkdir build
 cd build
+```
+
+On Windows:
+
+```
 cmake ../ -G "Visual Studio 17 2022" -A x64
 cmake --build . --config Release
+```
+
+On Linux:
+
+```
+cmake ../
+make
 ```
 
 On Mac OS X, run the following command to generate Xcode projects:
