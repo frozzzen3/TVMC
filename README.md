@@ -10,6 +10,45 @@ This repository contains the official authors implementation associated with the
 
 This tutorial demonstrates the complete pipeline using the `basketball player` dataset from [TDMD](https://multimedia.tencent.com/resources/tdmd).
 
+We've test this on Windows 11 and Ubuntu 20.04. We also provide a Linux docker image for your convenience.
+
+## Step 0:
+
+Install .Net 7.0
+
+For Linux:
+
+```
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+sudo apt-get update && \  sudo apt-get install -y dotnet-sdk-7.0
+sudo apt-get update && \  sudo apt-get install -y aspnetcore-runtime-7.0
+```
+
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+
+conda create -n open3d_env python==3.8 numpy open3d==0.18.0 scikit-learn scipy trimesh==4.1.0 -c conda-forge
+echo 'export PATH="$HOME/miniconda3/bin:$PATH"' 
+
+~/.bashrc source ~/.bashrc
+conda init
+source ~/.bashrc
+conda activate open3d_env
+```
+
+
+
+For windows you can use anaconda.
+
+Clone this project:
+
+```
+git clone https://github.com/frozzzen3/TVMC.git
+```
+
 ## Step 1: As-Rigid-As-Possible (ARAP) Volume Tracking
 
 ARAP volume tracking is written in C# and .NET 7.0
@@ -88,6 +127,14 @@ python ./get_transformation.py --dataset basketball_player --num_frames 10 --num
 ```
 
 ## Step 4: Create Volume-Tracked, Self-Contact-Free Reference Mesh
+
+Switch to .NET 5.0.
+
+```
+sudo apt-get install -y dotnet-sdk-5.0
+sudo apt-get install -y aspnetcore-runtime-5.0
+dotnet new globaljson --sdk-version 5.0.408
+```
 
 Navigate to the `tvm-editing` directory and build:
 
@@ -209,3 +256,10 @@ Run the evaluation:
 ```
 python ./evaluation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --firstIndex 11 --lastIndex 20 --fileNamePrefix basketball_player_fr0 --encoderPath ../draco/build/Release/draco_encoder.exe --decoderPath ../draco/build/Release/draco_decoder.exe --qp 10 --outputPath ./basketball_player_outputs
 ```
+
+For Linux:
+
+```
+python ./evaluation.py --dataset basketball_player --num_frames 10 --num_centers 1995 --firstIndex 11 --lastIndex 20 --fileNamePrefix basketball_player_fr0 --encoderPath ../draco/build/draco_encoder --decoderPath ../draco/build/draco_decoder --qp 10 --outputPath ./basketball_player_outputs
+```
+

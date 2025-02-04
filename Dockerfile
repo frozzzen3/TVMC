@@ -1,52 +1,54 @@
-# escape=`
+FROM ubuntu:20.04
 
-# Use Windows Server Core as base
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+# Set noninteractive mode for apt-get
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    git \
+    cmake \
+    g++ \
+    build-essential \
+    python3 \
+    python3-pip \
+    python3-venv \
+    sudo \
+    curl \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install .NET 7.0 SDK and runtime
+RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb \
+    && apt-get update \
+    && apt-get install -y dotnet-sdk-7.0 aspnetcore-runtime-7.0
+
+# Install Miniconda
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
+    && bash miniconda.sh -b -p /opt/conda \
+    && rm miniconda.sh \
+    && /opt/conda/bin/conda init
+
+ENV PATH="/opt/conda/bin:$PATH"
+
+# Create and activate conda environment
+RUN conda create -n open3d_env python=3.8 numpy open3d=0.18.0 scikit-learn scipy trimesh=4.1.0 -c conda-forge
+
+# Clone the project
+WORKDIR /app
+RUN git clone https://github.com/frozzzen3/TVMC.git
+
+# Install additional Python dependencies
+RUN /opt/conda/envs/open3d_env/bin/pip install --upgrade pip && \
+    /opt/conda/envs/open3d_env/bin/pip install numpy scikit-learn scipy trimesh
+
+# Set environment variables
+ENV PATH="/opt/conda/envs/open3d_env/bin:$PATH"
+ENV CONDA_DEFAULT_ENV=open3d_env
 
 # Set working directory
-WORKDIR C:\\app
+WORKDIR /app/TVMC
 
-RUN @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-
-# Install Visual Studio 2022 Build Tools with all necessary components
-RUN curl -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_BuildTools.exe `
-    && start /w vs_buildtools.exe --quiet --wait --norestart --nocache --installPath C:\BuildTools `  
-        --add Microsoft.VisualStudio.Workload.VCTools `  
-        --add Microsoft.VisualStudio.Component.VC.CMake.Project `  
-        --add Microsoft.VisualStudio.Component.Windows10SDK.20348 ` 
-    && del vs_buildtools.exe
-
-
-# Install Visual Studio 2022 Build Tools, Python, and Git
-RUN choco install git python miniconda cmake -y
-
-# Clone Draco repository
-RUN git clone https://github.com/google/draco.git C:\app\draco `
-    && cd C:\app\draco `
-    && mkdir build && cd build `
-    && cmake .. -G "Visual Studio 17 2022" -A x64 \
-#     && cmake --build . --config Release
-
-# # Clone TVMC project
-# RUN git clone https://github.com/frozzzen3/TVMC.git C:\app\TVMC
-
-# # Copy project files
-# COPY . C:\app
-
-# # Set up Conda and install Python dependencies from environment.yml
-# RUN conda env create -f C:\app\TVMC\environment.yml
-
-# # Activate Conda environment
-# SHELL ["cmd", "/C"]
-# RUN conda init powershell && conda activate open3d
-
-# # Build ARAP Volume Tracking
-# WORKDIR C:\app\arap-volume-tracking
-# RUN dotnet build -c Release
-
-# # Build TVM Editing
-# WORKDIR C:\app\tvm-editing
-# RUN dotnet build TVMEditor.sln --configuration Release --no-incremental
-
-# # Set entry point script
-# CMD ["powershell", "C:\\app\\run_pipeline.ps1"]
+CMD ["/bin/bash"]
