@@ -18,12 +18,18 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
+# Install OpenGL dependencies for Open3D
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0
+
 # Install .NET 7.0 SDK and runtime
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb \
     && apt-get update \
-    && apt-get install -y dotnet-sdk-7.0 aspnetcore-runtime-7.0
+    && apt-get install -y dotnet-sdk-7.0 aspnetcore-runtime-7.0 \
+    && apt-get install -y dotnet-sdk-5.0 aspnetcore-runtime-5.0
 
 # Install Miniconda
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
@@ -39,6 +45,11 @@ RUN conda create -n open3d_env python=3.8 numpy open3d=0.18.0 scikit-learn scipy
 # Clone the project
 WORKDIR /app
 RUN git clone https://github.com/frozzzen3/TVMC.git
+
+WORKDIR /app/TVMC
+RUN git clone https://github.com/google/draco.git && \
+    cd draco && mkdir build && cd build && \
+    cmake ../ && make
 
 # Install additional Python dependencies
 RUN /opt/conda/envs/open3d_env/bin/pip install --upgrade pip && \
