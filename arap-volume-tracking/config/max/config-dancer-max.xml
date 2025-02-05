@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <firstIndex>1</firstIndex>
-  <lastIndex>10</lastIndex>
+  <firstIndex>11</firstIndex>
+  <lastIndex>20</lastIndex>
   <inDir>data\dancer</inDir>
   <fileNamePrefix>dancer_fr0</fileNamePrefix>
   <outDir>data\dancer-output-max-2000</outDir>
