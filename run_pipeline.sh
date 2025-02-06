@@ -31,7 +31,7 @@ TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test basketball 1 11 20 "./TVMEditor
 cd ../TVMC
 python ./extract_reference_mesh.py --dataset basketball_player --num_frames 10 --num_centers 1995 --inputDir ../tvm-editing/TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/output/ --outputDir ../tvm-editing/TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995/reference_mesh/ --firstIndex 11 --lastIndex 20 --key 9
 
-# Step 6: Deform Reference Mesh to Each Mesh in the Group
+# Step 6: Deform the Reference Mesh to Each Mesh in the Group
 cd ../tvm-editing
 TVMEditor.Test/bin/Release/net5.0/TVMEditor.Test basketball 2 11 20 "./TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995" "./TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/"
 
@@ -46,7 +46,7 @@ python ./evaluation.py --dataset basketball_player --num_frames 10 --num_centers
 
 cd ../arap-volume-tracking
 
-dotnet new globaljson --sdk-version 7.0.306 --force
+dotnet new globaljson --sdk-version 7.0.410 --force
 
 dotnet ./bin/Client.dll ./config/max/config-dancer-max.xml
 
@@ -83,7 +83,7 @@ python ./evaluation.py --dataset dancer --num_frames 10 --num_centers 2000 --fir
 
 cd ../arap-volume-tracking
 
-dotnet new globaljson --sdk-version 7.0.306 --force
+dotnet new globaljson --sdk-version 7.0.410 --force
 
 dotnet ./bin/Client.dll ./config/max/config-mitch-max.xml
 
@@ -121,7 +121,7 @@ python ./evaluation.py --dataset mitch --num_frames 10 --num_centers 2000 --firs
 
 cd ../arap-volume-tracking
 
-dotnet new globaljson --sdk-version 7.0.306 --force
+dotnet new globaljson --sdk-version 7.0.410 --force
 
 dotnet ./bin/Client.dll ./config/max/config-thomas-max.xml
 
