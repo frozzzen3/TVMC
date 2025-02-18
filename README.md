@@ -138,7 +138,7 @@ Additional time-varying mesh sequences are available in `./arap-volume-tracking/
 To run ARAP volume tracking on a custom dataset:
 
 ```
-dotnet ./bin/client.dll <config_file.xml>
+dotnet ./bin/Client.dll <config_file.xml>
 ```
 
 ## Step 2: Generate Reference Centers Using Multi-Dimensional Scaling (MDS)
@@ -205,7 +205,7 @@ cd ../TVMC
 Extract the reference mesh:
 
 ```
-python ./extract_reference_mesh.py --dataset basketball_player --num_frames 10 --num_centers 1995 --inputDir ../tvm-editing/TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/output/ --outputDir ../tvm-editing/TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995/reference_mesh/ --firstIndex 11 --lastIndex 20
+python ./extract_reference_mesh.py --dataset basketball_player --num_frames 10 --num_centers 1995 --inputDir ../tvm-editing/TVMEditor.Test/bin/Release/net5.0/output/basketball_player_1995/output/ --outputDir ../tvm-editing/TVMEditor.Test/bin/Release/net5.0/Data/basketball_player_1995/reference_mesh/ --firstIndex 11 --lastIndex 20 --key 9
 ```
 
 ## Step 5: Deform Reference Mesh to Each Mesh in the Group
