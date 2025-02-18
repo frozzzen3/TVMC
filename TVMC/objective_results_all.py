@@ -2,13 +2,85 @@ import matplotlib.pyplot as plt
 import open3d as o3d
 import numpy as np
 
+import subprocess
+import json
+import numpy as np
+
+param_sets = []
+datasets = ["dancer", "basketball_player", "mitch", "thomas"]
+for qp in range (7, 17):
+    param_sets.append({'dataset': 'dancer', 'num_frames': 10, 'num_centers': 2000, 'firstIndex': 5, 'lastIndex': 14,
+     'fileNamePrefix': 'dancer_fr0', 'encoderPath': '../draco/build/draco_encoder', 'decoderPath': '../draco/build/draco_decoder',
+     'qp': qp, 'outputPath': './dancer_outputs'})
+
+for qp in range (7, 17):
+    param_sets.append({'dataset': 'basketball_player', 'num_frames': 10, 'num_centers': 1995, 'firstIndex': 11, 'lastIndex': 20,
+     'fileNamePrefix': 'basketball_player_fr0', 'encoderPath': '../draco/build/draco_encoder', 'decoderPath': '../draco/build/draco_decoder',
+     'qp': qp, 'outputPath': './basketball_player_outputs'})
+
+for qp in range (7, 17):
+    param_sets.append({'dataset': 'mitch', 'num_frames': 10, 'num_centers': 2000, 'firstIndex': 1, 'lastIndex': 10,
+     'fileNamePrefix': 'mitch_fr0', 'encoderPath': '../draco/build/draco_encoder', 'decoderPath': '../draco/build/draco_decoder',
+     'qp': qp, 'outputPath': './mitch_outputs'})
+
+for qp in range (7, 17):
+    param_sets.append({'dataset': 'thomas', 'num_frames': 10, 'num_centers': 2000, 'firstIndex': 1, 'lastIndex': 10,
+     'fileNamePrefix': 'thomas_fr0', 'encoderPath': '../draco/build/draco_encoder', 'decoderPath': '../draco/build/draco_decoder',
+     'qp': qp, 'outputPath': './thomas_outputs'})
+
+for params in param_sets:
+    print(params)
+
+bitrate_mbps_dict = {dataset: [] for dataset in datasets}
+d2s_mean_dict = {dataset: [] for dataset in datasets}
+
+for params in param_sets:
+    dataset_name = params['dataset']
+    print(f"Running dataset: {dataset_name}, qp = {params['qp']}")
+
+    cmd = [
+        "python3", "evaluation.py",
+        "--dataset", params['dataset'],
+        "--num_frames", str(params['num_frames']),
+        "--num_centers", str(params['num_centers']),
+        "--firstIndex", str(params['firstIndex']),
+        "--lastIndex", str(params['lastIndex']),
+        "--fileNamePrefix", params['fileNamePrefix'],
+        "--encoderPath", params['encoderPath'],
+        "--decoderPath", params['decoderPath'],
+        "--qp", str(params['qp']),
+        "--outputPath", params['outputPath']
+    ]
+
+    result = subprocess.run(cmd, text=True, capture_output=True)
+
+    try:
+        json_output = result.stdout.strip().split("\n")[-1]
+        data = json.loads(json_output)
+        print(f" bitrate (Mbps): {data['bitrate_mbps']}, D2-PSNR: {data['d2s_mean']}")
+        bitrate_mbps_dict[dataset_name].append(data["bitrate_mbps"])
+        d2s_mean_dict[dataset_name].append(data["d2s_mean"])
+    except (json.JSONDecodeError, KeyError) as e:
+        print(f"Failed to parse output for dataset {dataset_name}, qp = {params['qp']}: {e}")
+
+# Convert lists to NumPy arrays
+bitrate_mbps_arrays = {dataset: np.array(bitrate_mbps_dict[dataset]) for dataset in datasets}
+d2s_mean_arrays = {dataset: np.array(d2s_mean_dict[dataset]) for dataset in datasets}
+
+# Print results
+for dataset in datasets:
+    print(f"Dataset: {dataset}")
+    print("  Bitrate (Mbps):", bitrate_mbps_arrays[dataset])
+    print("  Mean d2s:", d2s_mean_arrays[dataset])
+
+
 ## Figure 4 (a) RD performance - Dancer
 Bitrates = [3.31, 3.99, 4.88, 6.13, 7.73, 9.44, 11.23, 12.81, 13.10, 13.13, 13.23, 13.43, 13.89, 20.08]
 D2_PSNR = [48.23, 54.34, 60.37, 66.54, 72.52, 78.56, 84.58, 90.57, 96.58, 102.63, 108.64, 114.65, 120.71, 126.24]
 
 
-ours_Bitrates = [1.76, 3.03, 4.7, 6.12, 8.29, 10.10, 11.90, 13.69, 15.49, 17.29]
-ours_D2_PSNR = [68.52, 74.57, 80.51, 86.27, 91.42, 95.18, 97.15, 97.97, 98.19, 98.25]
+ours_Bitrates = bitrate_mbps_arrays['dancer']
+ours_D2_PSNR = d2s_mean_arrays['dancer']
 
 KDDI_Bitrates = [2.18, 3.90, 9.12, 13.97, 21.25]
 KDDI_D2_PSNR = [70.79, 71.15, 77.26, 80.01, 80.75]
@@ -40,8 +112,8 @@ Bitrates = [4.02, 4.93, 6.19, 7.78, 9.50, 11.29, 12.89, 13.32, 13.38, 13.41, 13.
 D2_PSNR = [53.84, 59.83, 66.01, 71.99, 78.01, 84.03, 90.04, 96.06, 102.06, 109.43, 114.16, 120.17, 126.14]
 
 
-ours_Bitrates = [2.8, 4.41, 6.21, 8.01, 9.81, 11.61, 13.41, 15.21, 17.01, 18.8]
-ours_D2_PSNR = [72.23, 78.26, 84.13, 89.62, 93.97, 96.42, 97.34, 97.59, 97.66, 97.68]
+ours_Bitrates = bitrate_mbps_arrays['basketball_player']
+ours_D2_PSNR = d2s_mean_arrays['basketball_player']
 
 KDDI_Bitrates = [1.67, 3.05, 7.63, 12.21, 19.76]
 KDDI_D2_PSNR = [70.45, 71.61, 77.17, 80.04, 80.40]
@@ -73,8 +145,8 @@ Bitrates = [3.32, 4.11, 5.20, 6.47, 7.81, 9.19, 10.50, 10.95, 11.01, 11.45, 12.2
 D2_PSNR = [54.85, 60.94, 66.99, 73.02, 79.03, 85.05, 91.08, 97.14, 103.11, 109.13, 115.14, 121.18, 126.84]
 
 
-ours_Bitrates = [3.19, 4.97, 6.77, 8.57, 10.37, 12.17, 13.98, 15.78, 17.58, 19.38]
-ours_D2_PSNR = [81.67, 87.46, 92.63, 96.34, 98.15, 98.76, 98.93, 98.97, 98.98, 98.98]
+ours_Bitrates = bitrate_mbps_arrays['mitch']
+ours_D2_PSNR = d2s_mean_arrays['mitch']
 
 KDDI_Bitrates = [2.61, 3.28, 5.05, 7.72, 12.77]
 KDDI_D2_PSNR = [73.50, 74.62, 77.41, 81.04, 83.22]
@@ -106,8 +178,8 @@ Bitrates = [3.34, 4.13, 5.20, 6.46, 7.81, 9.18, 10.32, 10.90, 11.01, 11.09, 11.3
 D2_PSNR = [53.53, 59.59, 65.65, 71.72, 77.79, 83.95, 89.76, 95.79, 101.78, 107.81, 113.81, 119.83, 125.50]
 
 
-ours_Bitrates = [1.94, 3.34, 5.09, 6.89, 8.69, 10.49, 12.29, 14.09, 15.89, 17.69]
-ours_D2_PSNR = [69.52, 75.53, 81.50, 87.18, 92.14, 95.44, 96.91, 97.37, 97.49, 97.52]
+ours_Bitrates = bitrate_mbps_arrays['thomas']
+ours_D2_PSNR = d2s_mean_arrays['thomas']
 
 KDDI_Bitrates = [1.64, 2.82, 4.97, 7.06, 11.98]
 KDDI_D2_PSNR = [74.04, 77.16, 79.96, 81.36, 83.52]
@@ -226,4 +298,72 @@ plt.yticks(fontsize=34)
 plt.grid(True, which='both', linestyle='--', linewidth=0.7)
 #plt.title("Cumulative Distribution Function (CDF)")
 plt.savefig("./figures/cumulative_distribution_function_basketball.png", dpi=300, bbox_inches='tight')
+plt.show()
+
+## Thomas
+loaded_decimated_reference_mesh = o3d.io.read_triangle_mesh('../tvm-editing/TVMEditor.Test/bin/Release/net5.0/Data/thomas_2000/reference_mesh/decimated_reference_mesh.obj', enable_post_processing=False)
+#print(loaded_decimated_reference_mesh)
+subdivided_decimated_reference_mesh = o3d.geometry.TriangleMesh.subdivide_midpoint(loaded_decimated_reference_mesh, number_of_iterations=1)
+print(subdivided_decimated_reference_mesh)
+loaded_decimated_reference_mesh.compute_vertex_normals()
+subdivided_decimated_reference_mesh.compute_vertex_normals()
+
+#o3d.visualization.draw_geometries([subdivided_decimated_reference_mesh, fitting_mesh_dancer_i])
+
+
+vertices = np.array(subdivided_decimated_reference_mesh.vertices)
+x_threshold = 0
+y_threshold = 1.5
+z_threshold = 0.12
+
+selected_ids = [idx for idx in range(vertices.shape[0]) if
+                #vertices[idx, 0] > x_threshold or
+                vertices[idx, 1] > y_threshold or
+                vertices[idx, 2] > z_threshold]
+
+not_selected_ids = [idx for idx in range(vertices.shape[0]) if not (
+                #vertices[idx, 1] > y_threshold and
+                vertices[idx, 1] > y_threshold or
+                vertices[idx, 2] > z_threshold)]
+
+selected_vertices = vertices[not_selected_ids]
+selected_points_cloud = o3d.geometry.PointCloud()
+selected_points_cloud.points = o3d.utility.Vector3dVector(selected_vertices)
+
+#o3d.visualization.draw_geometries([subdivided_decimated_reference_mesh, selected_points_cloud])
+
+
+displacement = np.loadtxt(f'../tvm-editing/TVMEditor.Test/bin/Release/net5.0/output/thomas_2000/reference/displacements_thomas_009.txt')
+dis_select = []
+for i in range (selected_ids.__len__()):
+    #print(np.linalg.norm(displacement[selected_ids[i]]))
+    dis_select.append(np.linalg.norm(displacement[selected_ids[i]]))
+
+dis_not_select = []
+for i in range (not_selected_ids.__len__()):
+    #print(np.linalg.norm(displacement[not_selected_ids[i]]))
+    dis_not_select.append(np.linalg.norm(displacement[not_selected_ids[i]]))
+
+cumulative_select = np.linspace(0, 1, len(dis_select))
+
+sorted_data_select = np.sort(dis_select) *10
+sorted_data_not_select = np.sort(dis_not_select) *10
+
+cumulative_data_select = np.cumsum(sorted_data_select) / np.sum(sorted_data_select)
+cumulative_data_not_select = np.cumsum(sorted_data_not_select) / np.sum(sorted_data_not_select)
+
+plt.figure(figsize=(12, 12), num="Cumulative distribution function (CDF) of deformation distance for 'Thomas'")
+plt.plot(sorted_data_select, cumulative_data_select, label="Moving parts", linewidth=4, color='#1f77b4')
+plt.plot(sorted_data_not_select, cumulative_data_not_select, label="Static parts", linewidth=4, color='#ff7f0e')
+plt.legend(fontsize=34, loc = 'lower right', frameon=True)
+plt.xlabel("Deformation distance", fontsize=40)
+plt.ylabel("CDF", fontsize=40)
+plt.xlim(left=0, right=1.8)
+plt.ylim(top=1.05, bottom=-0.05)
+x_min, x_max = plt.xlim()
+plt.xticks(fontsize=34)
+plt.yticks(fontsize=34)
+plt.grid(True, which='both', linestyle='--', linewidth=0.7)
+#plt.title("Cumulative Distribution Function (CDF)")
+plt.savefig("./figures/cumulative_distribution_function_Thomas.png", dpi=300, bbox_inches='tight')
 plt.show()
